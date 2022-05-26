@@ -5,14 +5,13 @@ extension Log on Object {
   void log() => devtools.log(toString());
 }
 
+enum Animal { cat, dog }
+
 abstract class CanRun {
-  String get type {
-    if (this is Cat) {
-      return 'Cat';
-    } else {
-      return 'Something else';
-    }
-  }
+  final Animal type;
+  const CanRun({
+    required this.type,
+  });
 
   @mustCallSuper
   void run() {
@@ -21,6 +20,8 @@ abstract class CanRun {
 }
 
 class Cat extends CanRun {
+  const Cat() : super(type: Animal.cat);
+
   @override
   void run() {
     super.run();
@@ -28,12 +29,14 @@ class Cat extends CanRun {
   }
 }
 
-class Dog extends CanRun {}
+class Dog extends CanRun {
+  const Dog() : super(type: Animal.dog);
+}
 
 void testIt() {
-  final cat = Cat();
+  const cat = Cat();
   cat.type.log();
-  final dog = Dog();
+  const dog = Dog();
   dog.type.log();
 }
 
