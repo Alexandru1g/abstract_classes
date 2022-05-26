@@ -5,39 +5,25 @@ extension Log on Object {
   void log() => devtools.log(toString());
 }
 
-enum Animal { cat, dog }
-
 abstract class CanRun {
-  final Animal type;
-  const CanRun({
-    required this.type,
-  });
-
-  @mustCallSuper
   void run() {
-    "CanRun's run function is called".log();
+    "Running...".log();
   }
 }
 
-class Cat extends CanRun {
-  const Cat() : super(type: Animal.cat);
-
-  @override
-  void run() {
-    super.run();
-    'Cat running'.log();
+abstract class CanWalk {
+  void walk() {
+    "Walking...".log();
   }
 }
 
-class Dog extends CanRun {
-  const Dog() : super(type: Animal.dog);
-}
+class Cat with CanRun, CanWalk {}
 
 void testIt() {
-  const cat = Cat();
-  cat.type.log();
-  const dog = Dog();
-  dog.type.log();
+  final cat = Cat();
+  cat
+    ..run()
+    ..walk();
 }
 
 void main() {
