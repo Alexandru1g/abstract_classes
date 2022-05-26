@@ -6,14 +6,24 @@ extension Log on Object {
 }
 
 abstract class CanRun {
-  void run();
+  //@mustCallSuper
+  void run() {
+    "CanRun's run function is called".log();
+  }
 }
 
 class Cat extends CanRun {
   @override
   void run() {
-    // TODO: implement run
+    super.run();
+    'Cat running'.log();
   }
+}
+
+void testIt() {
+  'testit'.log();
+  final cat = Cat();
+  cat.run();
 }
 
 void main() {
@@ -25,6 +35,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    testIt();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
